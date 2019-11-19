@@ -1,0 +1,141 @@
+#pizza_background {
+    position: absolute;
+    color: silver;
+    z-index:-99;
+}
+
+body {
+  background-image: url("pizza_background.jpeg");
+  background-repeat: repeat;
+}
+
+.login {
+  padding: 20px;
+}
+
+.link {
+  color: saddlebrown;
+}
+
+.link:hover {
+  color: white;
+}
+
+.h1_menu {
+ color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+
+
+#category {
+    left: 25%;
+    width:30%;
+    position: absolute;
+}
+
+#category a{
+    background-color: transparent;
+    color: rgb(255,248,220);
+    text-align: right;
+    font-size: 17px;
+}
+/* #category a:hover{
+    background-color: saddlebrown;
+} */
+#logo {
+
+    padding-right: 22%;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-size: 40px;
+    text-shadow: 3px 3px 3px rgb(0,0,0);
+    background-color: gainsboro;
+}
+#logo a:link, #place_order:link, #confirm_order:link {
+    color:rgb(255,248,220);}
+#logo a:visited, #place_order:visited, #confirm_order:visited {
+    color:rgb(255,248,220);
+}
+#logo a:hover, #place_order:hover, #confirm_order:hover {
+    color:rgb(255,248,220);
+    text-decoration: none;
+}
+#logo a:active, #place_order:active, #confirm_order:active {
+    color:rgb(255,248,220);}
+@font-face {
+    font-family: webLogo;
+    src: url(Qwigley-Regular.ttf);
+}
+#username {
+    background-color: rgb(105, 105, 105);
+    color: white;
+}
+
+#center_box{
+    background-color: transparent;
+    color: white;
+    padding-top: 200px;
+    padding-right: 20%;
+    width: 50%
+}
+th {
+    border-bottom: 1px solid white;
+}
+#checkout {
+    color:white;
+    top:93%;
+    width:83%;
+}
+
+.plus {
+	-moz-box-shadow: 0px 1px 0px 0px #1c1b18;
+	-webkit-box-shadow: 0px 1px 0px 0px #1c1b18;
+	box-shadow: 0px 1px 0px 0px #1c1b18;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #eae0c2), color-stop(1, #ccc2a6));
+	background:-moz-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
+	background:-webkit-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
+	background:-o-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
+	background:-ms-linear-gradient(top, #eae0c2 5%, #ccc2a6 100%);
+	background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eae0c2', endColorstr='#ccc2a6',GradientType=0);
+	background-color:#eae0c2;
+	-moz-border-radius:15px;
+	-webkit-border-radius:15px;
+	border-radius:15px;
+	border:2px solid #333029;
+	display:inline-block;
+	cursor:pointer;
+	color:#505739;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	/* padding:12px; */
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.plus:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ccc2a6), color-stop(1, #eae0c2));
+	background:-moz-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
+	background:-webkit-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
+	background:-o-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
+	background:-ms-linear-gradient(top, #ccc2a6 5%, #eae0c2 100%);
+	background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc2a6', endColorstr='#eae0c2',GradientType=0);
+	background-color:#ccc2a6;
+}
+.plus:active {
+	position:relative;
+	top:1px;
+}
+#username {
+    position: fixed;
+    right: 0;
+    height: 100%
+}
+li {
+    list-style-type: none;
+}
+#place_order div:hover,#confirm_order div:hover{
+    box-shadow: 0px 0px 10px white;
+}
+#my_orders_container {
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    color: white;
+}

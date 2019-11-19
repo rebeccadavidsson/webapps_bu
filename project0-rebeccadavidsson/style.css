@@ -1,0 +1,42 @@
+body {
+  background: #404040;
+}
+
+.mountain {
+  background-image: url("../images/mountain.jpg");
+  height: 900px;
+  width: 100%;
+}
+.mountain h1 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  color: white;
+  font-size: 7vmin;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translate3d(-50%, -50%, 0);
+  transition: 2s;
+}
+
+.mountain p {
+  margin-right: 14%;
+  padding: 0;
+  position: absolute;
+  top: 60%;
+  left: 38%;
+  color: white;
+  font-size: 3vmin;
+  text-align: right;
+}
+
+@media screen and (max-width: 800px) {
+  .mountain {
+    background-image: url("../images/mountain.jpg");
+    background-size: 1000px 900px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

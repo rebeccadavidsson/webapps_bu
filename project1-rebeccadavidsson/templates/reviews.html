@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Books
+{% endblock %}
+
+{% block body %}
+
+{% if reviews %}
+<h1 style="margin-top:80px; margin-bottom:30px;"> Your reviews: </h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Book title</th>
+        <th scope="col">Review title</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Review</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in reviews %}
+      <tr>
+        <td> {{ row[0] }}</td>
+        <td> {{ row[2] }}</td>
+        <td>{{  row[3] }}</td>
+        <td> {{ row[4] }} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<h1 style="margin-top:80px; margin-bottom:30px;"> You don't have any reviews yet. </h1>
+{% endif %}
+
+{% endblock %}

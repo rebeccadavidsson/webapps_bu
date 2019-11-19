@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Books
+{% endblock %}
+
+{% block body %}
+
+<h1 style="color: grey; padding-top:100px;"">Zoek naar een leuk boek!</h1>
+<!-- Search form -->
+<form action="/books" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="book" placeholder="Zoek naar isbn, naam, title of jaar." type="text"/>
+        <button class="btn btn-primary" type="submit">Zoek</button>
+    </div>
+</form>
+
+<br>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Year</th>
+      <th scope="col">Review</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in book %}
+    <tr>
+      <td> {{ row }} </td>
+      <td>{{ book[row]["isbn"] }}</td>
+      <td>
+        <a href="{{ url_for('history', book_id =  book[row]['isbn']) }}"> {{ book[row]["titel"] }}</a>
+      </td>
+      <td>
+        <a href="{{ url_for('history', book_id = book[row]['isbn']) }}"> {{ book[row]["auteur"] }} </a>
+      </td>
+      <td> {{ book[row]["jaar"] }} </td>
+      <td>
+        <button onclick="window.location.href = '{{ url_for('history', book_id = book[row]['isbn']) }}' ;" type="button" class="btn btn-light">Write review</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

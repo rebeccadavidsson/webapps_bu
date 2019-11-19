@@ -1,0 +1,131 @@
+/* SOURCE: https://bootsnipp.com/snippets/vl4R7 */
+/* Made with love by Mutiullah Samim*/
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('gradient.jpg');
+background-size: cover;
+background-repeat: repeat;
+height: 100%;
+color: white;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #33FF99;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotchat {
+  height: 15px;
+  width: 15px;
+  background-color: #33FF99;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+li {
+  list-style: none;
+}
+
+h3 {
+  display: inline-block;
+}
+
+.card-login {
+border-radius: 20px 20px 20px 20px;
+height: 82vh;
+margin-left: 200px;
+margin-top: 70px;
+/* width: 8rem; */
+width: 45%;
+background-color: #202020 !important;
+}
+
+.card{
+overflow: auto;
+border-radius: 20px 0px 0px 20px;
+height: 82vh;
+margin-left: 150px;
+margin-top: 70px;
+/* width: 8rem; */
+width: 45%;
+background-color: #202020 !important;
+}
+
+.card-loggedin{
+border-radius: 0px 20px 20px 0px;
+height: 82vh;
+margin-right: 20px;
+margin-top: 70px;
+width: 50%;
+background-color: rgba(0,0,0,0.6) !important;
+}
+
+.users{
+  border-radius: 13px 0px 0px 13px;
+  height: 75vh;
+  width: 23vh;
+  margin-left: 40px;
+  margin-top: 90px;
+  /* width: 50%; */
+  background-color: rgba(0,0,0,0.6) !important;
+  position: absolute;
+  text-align: left;
+  overflow: auto;
+}
+
+
+.table-hover tbody tr:hover td {
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: gold;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+}
+
+
+.login_btn{
+color: black;
+background-color: gold;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: lightgrey;
+}
+
+.form-control{
+  width:100%;
+}
+
+.messages{
+  overflow: auto;
+  background-color:white;
+  color: black;
+  height: 45vh;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.messages li {
+  margin-left: 20px;
+  font-family: 'Numans', sans-serif;
+
+}

@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block body %}
+
+{% if username == None %}
+<!-- <div class="container"> -->
+	<div class="d-flex justify-content-center h-100">
+		<div class="card-login">
+			<div class="card-body">
+        <div class="card-header">
+  				<h3>Sign up</h3></div>
+          <form id="form">
+  					<div class="input-group form-group">
+  						<div class="input-group-prepend">
+  							<span class="input-group-text"><i class="fas fa-user"></i></span>
+  						</div>
+  						<input id="username" type="text" class="form-control" placeholder="username">
+  					</div>
+  					<div class="form-group">
+  						<input type="submit" value="Sign up" class="btn float-right login_btn">
+  					</div>
+  				</form>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+{% else %}
+<form id="form" action="/logout" method="post">
+  <input type="submit" value="Log out" class="btn float-right login_btn">
+</form>
+
+
+<div class="card-group">
+  <div class="card" style="width:100px;">
+      <div class="card-header" style="background-color: rgba(192,192,192,0.9); border-radius: 20px 0px 0px 0px;">
+        <span class="dot"></span>
+        <h3> Welcome {{ username }}! </h3>
+      </div>
+
+      <table class="table" style="background-color: rgba(169,169,169,0.8);"">
+      <thead><tr>
+          <th>
+            <div class="channelcontainer">
+              <form id="createchannel">
+                <input type="text" id="createchannelinput" name="createchannel" class="form-control" placeholder="Channel"><br>
+                <input type="submit" class="btn login_btn" style="width: 100%;" value="Create or join a channel">
+              </form>
+            </div>
+          </th>
+        </tr></thead>
+
+    <table class="table table-hover" style="margin-top: 5px; text-align: center;">
+      <thead style="font-size: 18px;">
+        <!-- <tr>
+          <th scope="col">All channels:</th>
+        </tr> -->
+      </thead>
+      <tbody  id="channelstable">
+
+      </tbody>
+  </table>
+
+</div>
+  <div class="card-loggedin">
+		<div class="card-body" style="position:relative;">
+      <div class="card-header">
+        {% if current_channel != None %}
+        <h4 id="channelheader">Current channel: {{ current_channel }}</h4>
+        {% else %}
+        <h4 id="channelheader">Join or create a channel</h4>
+        {% endif %}
+      </div>
+      <div id="messagescontainer" style="display: none">
+        <table class="table" style="margin-bottom:30px; position: absolute; top:60vh;">
+        <thead><tr>
+            <th scope="col">
+            <form id="messageform">
+              <input type="text" id="message" name="message" class="form-control" style="width:100%;" placeholder="Message"><br>
+              <input id="sendmessage" type="submit" class="btn login_btn" style="width: 100%;" value="Send">
+            </form>
+            </th>
+          </tr></thead>
+          </table>
+          <div class="messages" id="messages"></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

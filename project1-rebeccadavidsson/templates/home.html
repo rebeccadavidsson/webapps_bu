@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center" style="margin-top:30px">EN NOU INLOGGEN</h1>
+    <h4 class="text-center">Minor programmeren joepie</h4>
+
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+          <!-- Login Form -->
+          <form action="/home" method="post">
+            <input type="text" id="login" class="fadeIn second" name="name" placeholder="Naam">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Wachtwoord">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+        </div>
+      </div>
+
+      <div class="wrapper"><h1>INLOGGEN</h1></div>
+      <p style="text-align: center; color: grey; padding-bottom: 150px;">JE KAN HET</p>
+
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+$height: 900px;
+
+body {
+  background: #404040;
+}
+
+.mountain {
+    background-image: url('../images/mountain.jpg');
+    height: $height;
+    width: 100%;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      color: white;
+      font-size: 7vmin;
+      text-align: center;
+      text-transform: uppercase;
+      transform: translate3d(-50%, -50%, 0);
+      transition: 2s;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 30%;
+      left: 40%;
+      color: white;
+      font-size: 4vmin;
+      text-align: center;
+    }
+
+}

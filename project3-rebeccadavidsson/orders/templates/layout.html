@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <title>Pizza project</title>
+</head>
+<body style="height:100%">
+    <img id='pizza_background' src="{% static 'pizza_background.jpeg' %}">
+    {% if Category %}  <!--hide when not logged in-->
+    <div id='username'>
+        <h5 class='px-3' ><a href="{% url 'index' %}"><img src="{% static 'home.png' %}"></a>
+            user: {{user.username}}
+            {% if user.is_superuser %}
+            <small><a href="{% url 'orders_manager' user Order_number %}" class="link" >Orders manager</a></small> |
+            {% endif %}
+            {% if not user.is_superuser %}
+            <small><a href="{% url 'my_orders' Order_number %}" class="link">MY ORDERS</a></small> |
+            {% endif %}
+            <small><a href="{% url 'logout' %}" class="link">LOG OUT&nbsp;</a></small>
+        </h5>
+
+        <div id='checkout' class='list-group text-right ' style="padding-bottom: 20px;">
+        {% if Category %}  <!--hide when not logged in-->
+            <h3 class=' text-right pr-3'>Your order</h3>
+            <ul >
+                <hr>
+                {% for check_cat in Checkout_category %}
+                    <li class='text-right pr-3' style="color: saddlebrown">{{check_cat|cut:"("|cut:")"|cut:","|cut:"'"}}</li>
+                    {% for row in Checkout %}
+                    {% if row.category == check_cat|cut:"("|cut:")"|cut:","|cut:"'"  %}
+                    <li class='pr-3'>{{row}}&nbsp;<a href="{% url 'delete' row.category row.name row.price %}">Remove</a></li>
+                    {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                <hr>
+                <li class='text-info text-right pr-3 '><h1 style="color: saddlebrown"><small class='text-white'></small> ${{Total|floatformat:2}}</h1></li>
+            </ul>
+        <a id='place_order'  href="{% url 'my_orders' Order_number %}"><div  class='w-50 rounded p-3  ml-auto mr-3 text-center text-white ' style="background-color: sienna;"><h4>Confirm order</h4></div></a>
+        {% endif %}
+        </div>
+    </div>
+
+
+    {% endif %}
+    <p id='logo' class='text-center m-0 font-weight-bold'><a href="{% url 'index' %}">Project 3: Pizza</a></p>
+    <div id='category' class="list-group">
+        {% for category in Category %}
+         <a href="{% url 'menu' category  %}" >{{category}}</a>
+        {% endfor %}
+    </div>
+
+    <div id='center_box' class='w-50  mx-auto'>
+        {% block body%}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="margin-top:30px">Registratie</h1>
+    <h4 class="text-center">Minor programmeren joepie</h4>
+
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+          <!-- Login Form -->
+          <form action="{{ url_for('register') }}" method="post">
+            <input type="text" id="name" class="fadeIn second" name="name" placeholder="Naam">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Wachtwoord">
+            <input type="password" id="password2" class="fadeIn third" name="password2" placeholder="Verifiëer wachtwoord">
+            <input type="submit" class="fadeIn fourth" value="Registreer">
+          </form>
+
+        </div>
+
+      </div>
+
+        <div class="wrapper"><h1>je kan het</h1></div>
+        <p style="text-align: center; color: grey; padding-bottom: 100px;">JE KAN HET</p>
+
+
+{% endblock %}
