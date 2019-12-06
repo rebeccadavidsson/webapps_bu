@@ -1,0 +1,55 @@
+body {
+  background-color: #E0E0E0;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 27%, rgba(0,212,255,1) 100%);
+}
+
+.btn {
+  bottom: 15px;
+}
+
+.price_div {
+  font-size: 20px;
+}
+
+.pricefooter {
+  vertical-align: bottom;
+  font-size: 16px;
+  text-align: right;
+  padding-right: 25px;
+}
+
+.tableheader {
+  font-size: 18px;
+}
+
+.form-check-input  {
+  margin-left: 5px;
+}
+
+.form-check-label  {
+  margin-left: 28px;
+}
+
+.modal-dialog,
+.modal-content {
+    font-size: 19px;
+    /* margin: 10px; */
+    width: 130%;
+    height: 90%
+}
+
+.modal-body {
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+}
+
+#thgold {
+  border: 1px solid #656565;
+  border-color: moccasin;
+  border-width: 5px;
+}
+
+#carttable {
+  font-size: 19px;
+}

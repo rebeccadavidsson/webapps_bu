@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+
+
+
+{% block body %}
+
+
+  {% csrf_token %}
+<div class="row" style="padding-top: 4%;">
+  <div class="col-12 col-md-8">
+    <div class="card center" style="width: 90%; margin: 0 auto;">
+      <div class="card-body">
+        <table class='table'>
+
+          <thead class='thead-light'>
+              <tr >
+                  <th class="tableheader" style="font-size: 18px;">Pizza's</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for pizza in pizzas %}
+              <tr>
+                  <td style="font-size:16px;">{{ pizza.name }}</td>
+                  {% if pizza.small_price == None %}
+                      <td></td>
+                  {% else %}
+                      <td>
+                        <a href="#myModal" class="myModal"  data-toggle="modal" data-target="#exampleModalCenter" data-id="{{ pizza.name }} {{ pizza.small_price}}" onclick="clearChecks()">
+                        <button type="button-large" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{ pizza.name }}">Small</button></a>
+                         ${{pizza.small_price}}</td>
+                  {% endif %}
+                  {% if pizza.large_price == None %}
+                      <td></td>
+                  {% else %}
+                      <td>
+                        <a href="#myModal" class="myModal"  data-toggle="modal" data-target="#exampleModalCenter" data-id="{{ pizza.name }} {{ pizza.large_price}}" onclick="clearChecks()">
+                          <button type="button-large" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter" data-id="{{pizza.name}}">Large</button></a>
+                        ${{pizza.large_price}}</td>
+                  {% endif %}
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      <!-- </form> -->
+
+      <br><br><br>
+
+      <table class='table'>
+        <thead class='thead-light'>
+            <tr >
+                <th class="tableheader">Salads</th>
+                <th class="tableheader">Price</th>
+            </tr>
+        </thead>
+          <tbody>
+              {% for salad in salads %}
+              <tr>
+                  <td>{{salad.name}}</td>
+
+
+                  <td><button  type="button-large" class="btn btn-light" onclick="addToppings()">Add</button>
+                    ${{salad.price}}
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Select your toppings for the </h5>&nbsp <h5 id="modalTitle" class="modal-title"> </h5>
+                <h5 class="modal-title">&nbsppizza</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                {% for topping in toppings %}
+                <div class="form-check form-check">
+                  <input class="form-check-input" name="{{ topping.id }}" type="checkbox" value="unchecked" onclick="checkTopping(this)">
+                  <label  class="form-check-label" for="inlineCheckbox1">{{ topping }}</label>
+                  <p></p>
+                </div>
+                {% endfor %}
+              </div>
+
+              <div class="pricefooter">
+                Every topping + $0.50
+              </div>
+              <div class="modal-footer" style="font-size:20px;">
+                Total: &nbsp
+                $<div id="price_div" class="price_div" ></div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addToppings()" aria-hidden="true">Save toppings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4">
+    <div class="card center" style="width: 90%; margin: 0 auto;">
+      <div class="card-body">
+
+
+        <table class='table'>
+          <thead class='thead-light' style="background:gold;" >
+              <tr>
+                  <th id="thgold" style="background:gold;" class="tableheader" style="font-size: 18px;">{{ request.user }}'s cart</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% if not orders %}
+            <tr>
+              <td>  Your cart is empty.</td>
+            </tr>
+            {% else %}
+              {% for order in orders %}
+              <tr>
+                <td>{{ order }}</td>
+              </tr>
+              {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+
+
+<!-- row div -->
+</div>
+
+
+
+
+{% endblock %}
