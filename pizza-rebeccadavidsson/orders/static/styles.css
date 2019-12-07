@@ -2,6 +2,7 @@ body {
   background-color: #E0E0E0;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 27%, rgba(0,212,255,1) 100%);
+  margin:40px;
 }
 
 .btn {
@@ -10,6 +11,9 @@ body {
 
 .price_div {
   font-size: 20px;
+  animation-duration: 2s;
+  animation-delay: 0.1s;
+  /* animation-iteration-count: 1; */
 }
 
 .pricefooter {
@@ -48,6 +52,13 @@ body {
   border: 1px solid #656565;
   border-color: moccasin;
   border-width: 5px;
+}
+
+#content_middle {
+  /* background: rgba(0,0,0,0.5); */
+  /* background-color: rgba(255, 255, 0, 3); */
+  position: relative;
+  top: 4.7em;
 }
 
 #carttable {

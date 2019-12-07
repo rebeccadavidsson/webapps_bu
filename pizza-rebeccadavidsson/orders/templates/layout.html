@@ -26,16 +26,25 @@
       <script src="{% static 'mdb.min.js' %}"></script> -->
       <link href= "{% static 'MDB-free/css/mdb.min.css' %}" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
 
       <script type="text/javascript" src="{% static 'modalscript.js' %}"></script>
 
     <title>Pizza project</title>
 </head>
+
 <body>
+  <div class="card" style="background-color: rgba(20, 20, 0, .3);">
+
+  <nav class="navbar navbar-light blue lighten-4">
+    <a class="navbar-brand" href="#"></a>
+    <br><br><b>
+  </nav>
+
 
   {% block body%}
   {% endblock %}
-
+    </div>
 </body>
 </html>

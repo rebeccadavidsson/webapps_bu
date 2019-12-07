@@ -18,13 +18,14 @@ class Pizza(models.Model):
     small_price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-
-        if self.large_price and self.small_price:
-            return f'{self.name}, {self.small_price}, {self.large_price}'
-        elif self.large_price:
-            return f'{self.name}, {self.large_price}'
-        elif self.small_price:
-            return f'{self.name}, {self.small_price}'
+        return f'{self.name}'
+        # TODO
+        # if self.large_price and self.small_price:
+        #     return f'{self.name}, {self.small_price}, {self.large_price}'
+        # elif self.large_price:
+        #     return f'{self.name}, {self.large_price}'
+        # elif self.small_price:
+        #     return f'{self.name}, {self.small_price}'
 
 
 class Salad(models.Model):
@@ -42,10 +43,10 @@ class Item(models.Model):
 
     # One pizza can have several toppings
     toppings = models.ManyToManyField(Topping, related_name="toppings")
-    # price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f'Pizza: {self.pizza}, salad: {self.salad}, topping: {self.toppings.all()}'
+        return f'Price: {self.price}, pizza: {self.pizza}, salad: {self.salad}, topping: {self.toppings.all()}'
 
 
 class Order(models.Model):

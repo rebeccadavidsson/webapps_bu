@@ -6,7 +6,7 @@
 
 
   {% csrf_token %}
-<div class="row" style="padding-top: 4%;">
+<div class="row" style="padding-top: 4%; margin:0px;background-color: rgb(220,220,220, 0.4);">
   <div class="col-12 col-md-8">
     <div class="card center" style="width: 90%; margin: 0 auto;">
       <div class="card-body">
@@ -45,7 +45,7 @@
         </table>
       <!-- </form> -->
 
-      <br><br><br>
+      <br><br>
 
       <table class='table'>
         <thead class='thead-light'>
@@ -93,7 +93,7 @@
               <div class="pricefooter">
                 Every topping + $0.50
               </div>
-              <div class="modal-footer" style="font-size:20px;">
+              <div class="modal-footer" style="font-size:22px;">
                 Total: &nbsp
                 $<div id="price_div" class="price_div" ></div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -117,7 +117,7 @@
                   <th id="thgold" style="background:gold;" class="tableheader" style="font-size: 18px;">{{ request.user }}'s cart</th>
               </tr>
           </thead>
-          <tbody>
+          <tbody id="carttablebody">
             {% if not orders %}
             <tr>
               <td>  Your cart is empty.</td>
@@ -128,6 +128,9 @@
                 <td>{{ order }}</td>
               </tr>
               {% endfor %}
+              <tr>
+                <td style="text-align:right; font-size:19px;">Total: $ &nbsp <p id="totalcart_price"></p></td>
+              </tr>
             {% endif %}
             </tbody>
         </table>

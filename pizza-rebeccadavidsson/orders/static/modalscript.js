@@ -17,8 +17,8 @@ $(document).ready(function(){
     var price_div = document.getElementById("price_div");
     price_div.innerHTML = price;
 
+    animateCSS(price_div, 'tada')
   });
-
 });
 
 function clearChecks() {
@@ -30,8 +30,27 @@ function clearChecks() {
   }
 }
 
+function animateCSS(element, animationName, callback) {
+    const node = document.querySelector(".price_div");
+
+    node.classList.add('animated', animationName)
+
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd)
+}
+
 // Change price after adding max 3 toppings
 function checkTopping(elem) {
+
+  // Change price of div
+  var price_div = document.querySelector(".price_div");
+  animateCSS(price_div, 'tada')
 
   // Check for max 3 toppings
   var allInputs = document.querySelectorAll(".form-check-input")
@@ -47,8 +66,6 @@ function checkTopping(elem) {
   }
   else {
 
-    // Change price of div
-    var price_div = document.querySelector(".price_div");
     temp = parseFloat(price_div.innerHTML.toString())
 
     if (elem.value == "unchecked") {
@@ -76,7 +93,7 @@ function addToppings() {
   // Get current price
   var price_div = document.getElementById("price_div");
   price = price_div.innerHTML
-  console.log("price", price);
+
   toppingsArray.push(price)
 
   for (i = 0; i < allInputs.length; i++) {
@@ -96,11 +113,11 @@ function addToppings() {
        url: 'add_topping/',
        data: toppings,
        success:  function(response){
-
+              
               console.log("Redirect to homepage");
 
               // Redirect to homepage
-              // window.location.href = "/"
+              window.location.href = "/"
           }
    });
 

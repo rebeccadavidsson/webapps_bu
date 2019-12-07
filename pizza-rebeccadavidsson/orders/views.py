@@ -8,7 +8,7 @@ from .models import Pizza, Salad, Topping, Order, Item
 
 def index(request):
     """ Load menu """
-
+    calc_totalprice(request)
     print("IK LAAD HET MENU")
 
     if not Order.objects.filter(user=request.user):
@@ -25,7 +25,7 @@ def index(request):
         pizzas = []
         for item in itemslist_temp:
             pizzas.append(item.first())
-            print(pizzas)
+            # print(pizzas)
 
 
     context = {
@@ -36,6 +36,19 @@ def index(request):
     }
 
     return render(request, "index.html", context)
+
+
+def calc_totalprice(request):
+    print("CALC PRICE")
+    orders = Order.objects.filter(user=request.user).values('item')
+    orders = orders.values_list("item", flat=True)
+    itemslist_temp, itemslist = [], []
+    for order in orders:
+        itemslist.append(order)
+    for item in itemslist:
+        itemslist_temp.append(Item.objects.filter(id=item))
+    print(itemslist_temp[0].get('item'), "TEMP")
+    return None
 
 
 def add_topping(request):
@@ -53,7 +66,7 @@ def add_topping(request):
     ids.pop(0)
     price = ids[0]
     ids.pop(0)
-    print(price, "PRICE")
+    print(float(price), "PRICE")
 
     # Convert strings to integers to get id's
     nums, tops = [], []
@@ -64,7 +77,7 @@ def add_topping(request):
     pizza = Pizza.objects.filter(name=name).first()
 
     # Make new item with these toppings
-    item = Item(pizza=pizza)
+    item = Item(pizza=pizza, price=price)
     item.save()
     # item.pizza = pizza
     [print(top.first()) for top in tops]
@@ -74,7 +87,7 @@ def add_topping(request):
 
     # Check if this user already has an order
     order = Order.objects.filter(user=request.user).first()
-
+    # print(item, "ITEM")
     # Create new order for this user if it doesn't exist
     if order is None:
         order = Order(user=request.user)
@@ -83,6 +96,6 @@ def add_topping(request):
     # Add item to orders for this user
     order.item.add(item)
     order.save()
-    print(order, "order")
+    # print(order, "order")
 
     return HttpResponse("Redirect index")
