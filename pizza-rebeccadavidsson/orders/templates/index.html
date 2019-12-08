@@ -57,11 +57,9 @@
           <tbody>
               {% for salad in salads %}
               <tr>
-                  <td>{{salad.name}}</td>
-
-
-                  <td><button  type="button-large" class="btn btn-light" onclick="addToppings()">Add</button>
-                    ${{salad.price}}
+                  <td>{{ salad.name }}</td>
+                  <td><button  id="{{ salad.name }}" value ="{{ salad.large_price }}" type="button-large" class="btn btn-light" onclick="addToppings('salad', this)">Add</button>
+                    ${{ salad.large_price }}
                   </td>
               </tr>
               {% endfor %}
@@ -97,7 +95,7 @@
                 Total: &nbsp
                 $<div id="price_div" class="price_div" ></div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="addToppings()" aria-hidden="true">Save toppings</button>
+                <button type="button" class="btn btn-primary" onclick="addToppings('pizza', this)" aria-hidden="true">Save toppings</button>
               </div>
             </div>
           </div>
@@ -112,24 +110,39 @@
 
 
         <table class='table'>
-          <thead class='thead-light' style="background:gold;" >
+          <thead class='thead-light' style="background:gold;" id="headgold" >
               <tr>
-                  <th id="thgold" style="background:gold;" class="tableheader" style="font-size: 18px;">{{ request.user }}'s cart</th>
+                  <th style="background:gold;" class="tableheader" style="font-size: 18px;">{{ request.user }}'s cart</th>
+                  <th style="background:gold;"></th>
               </tr>
           </thead>
-          <tbody id="carttablebody">
+          <tbody>
             {% if not orders %}
             <tr>
               <td>  Your cart is empty.</td>
             </tr>
             {% else %}
-              {% for order in orders %}
+              {% for order, price, id, toppings_chosen in orders %}
               <tr>
-                <td>{{ order }}</td>
+                <td class="carttablebody">{{ order }}</td>
+                <td class="carttablebody">${{ price }}
+                  <a href="{% url 'delete' id %}">
+                  <button type="button" name="button" class="btn btn-outline-warning waves-effect" id="deletebtn"> Delete </button>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                {% if toppings_chosen %}
+                <td style="border-top: none;">
+                  {{ toppings_chosen }}
+                </td>
+                {% endif %}
+                <td style="border-top: none;"></td>
               </tr>
               {% endfor %}
               <tr>
-                <td style="text-align:right; font-size:19px;">Total: $ &nbsp <p id="totalcart_price"></p></td>
+                <td></td>
+                <td style="text-align:right; font-size:19px;">Total: $ &nbsp <p id="totalcart_price"> {{ total }}</p></td>
               </tr>
             {% endif %}
             </tbody>

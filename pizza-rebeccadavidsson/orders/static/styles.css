@@ -48,10 +48,21 @@ body {
     overflow-y: scroll;
 }
 
-#thgold {
+.carttablebody {
+  font-size: 20px;
+}
+
+#deletebtn {
+    padding-left:8px;
+    padding-right:8px;
+    float: right;
+}
+
+#headgold {
   border: 1px solid #656565;
   border-color: moccasin;
   border-width: 5px;
+  background:gold;
 }
 
 #content_middle {

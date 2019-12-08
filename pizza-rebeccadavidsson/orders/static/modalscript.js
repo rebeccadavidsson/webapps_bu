@@ -81,30 +81,40 @@ function checkTopping(elem) {
   }
 }
 
-function addToppings() {
+function addToppings(category, elem) {
 
-  // Get selected pizza
-  var selected_pizza = document.getElementById("modalTitle").innerHTML
+  if (category == "pizza") {
 
-  // Collect all selected toppings
-  var allInputs = document.querySelectorAll(".form-check-input")
-  var toppingsArray = [selected_pizza]
+    // Get selected pizza
+    var selected_pizza = document.getElementById("modalTitle").innerHTML;
+    var toppingsArray = [selected_pizza]
 
-  // Get current price
-  var price_div = document.getElementById("price_div");
-  price = price_div.innerHTML
+    // Collect all selected toppings
+    var allInputs = document.querySelectorAll(".form-check-input")
 
-  toppingsArray.push(price)
+    // Get current price
+    var price_div = document.getElementById("price_div");
+    price = price_div.innerHTML
 
-  for (i = 0; i < allInputs.length; i++) {
-    if (allInputs[i].value == "checked") {
-      toppingsArray.push(allInputs[i].name)
+    toppingsArray.push(price)
+
+    for (i = 0; i < allInputs.length; i++) {
+      if (allInputs[i].value == "checked") {
+        toppingsArray.push(allInputs[i].name)
+      }
     }
-  }
 
+  }
+  else {
+    var selected_pizza = elem.id
+    var toppingsArray = [selected_pizza]
+    var price = elem.value;
+    toppingsArray.push(price)
+  }
 
   // Convert to string to push to data for ajax request
   toppings = toppingsArray.join(",")
+
 
   // Send out new ajax request linked to add_topping() in views.py
   // data = string of item-name and topping id
@@ -113,12 +123,11 @@ function addToppings() {
        url: 'add_topping/',
        data: toppings,
        success:  function(response){
-              
+
               console.log("Redirect to homepage");
 
               // Redirect to homepage
               window.location.href = "/"
           }
    });
-
 }

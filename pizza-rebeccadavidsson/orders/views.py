@@ -2,53 +2,49 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.core import serializers
 import json
-
 from .models import Pizza, Salad, Topping, Order, Item
 
 
 def index(request):
     """ Load menu """
-    calc_totalprice(request)
-    print("IK LAAD HET MENU")
-
+    print(Order.objects.filter(user=request.user), "KSDHFK")
     if not Order.objects.filter(user=request.user):
-        orders = None
-        itemslist_temp = []
+        orders, prices, toppings = None, None, None
     else:
-        orders = Order.objects.filter(user=request.user).values('item')
-        orders = orders.values_list("item", flat=True)
-        itemslist_temp, itemslist = [], []
-        for order in orders:
-            itemslist.append(order)
-        for item in itemslist:
-            itemslist_temp.append(Item.objects.filter(id=item))
-        pizzas = []
-        for item in itemslist_temp:
-            pizzas.append(item.first())
-            # print(pizzas)
-
+        pizzas, prices, ids, toppings = get_price_and_pizzas(request)
+        orders = zip(pizzas, prices, ids, toppings)
+        prices = round(sum(prices), 2)
 
     context = {
-        "pizzas": Pizza.objects.all(),
-        "salads": Salad.objects.all(),
+        "pizzas": Pizza.objects.filter(category="pizza"),
+        "salads": Pizza.objects.filter(category="salad"),
         "toppings": Topping.objects.all(),
-        "orders": pizzas
+        "orders": orders,
+        "total": prices,
+        "toppings_chosen": toppings,
     }
 
     return render(request, "index.html", context)
 
 
-def calc_totalprice(request):
-    print("CALC PRICE")
-    orders = Order.objects.filter(user=request.user).values('item')
-    orders = orders.values_list("item", flat=True)
-    itemslist_temp, itemslist = [], []
-    for order in orders:
-        itemslist.append(order)
-    for item in itemslist:
-        itemslist_temp.append(Item.objects.filter(id=item))
-    print(itemslist_temp[0].get('item'), "TEMP")
-    return None
+def get_price_and_pizzas(request):
+    """ Calculate total price and get ordered pizza's """
+
+    orders = Order.objects.filter(user=request.user).values('item').values_list("item", flat=True)
+    tt, pizzanames, itemslist_temp, itemslist, prices, items, ids = [], [], [], [], [], [], []
+    [itemslist.append(order) for order in orders]
+    [itemslist_temp.append(Item.objects.filter(id=item)) for item in itemslist]
+    [items.append(item.first()) for item in itemslist_temp]
+
+    # Calculate total price from all individual orders of a user
+    for item in items:
+        tt.append(item.toppings.strip("[]").strip("'"))
+        prices.append(float(item.price))
+        pizzanames.append(item.pizza)
+        ids.append(item.id)
+
+    # Return all ordered pizza's and total price
+    return pizzanames, prices, ids, tt
 
 
 def add_topping(request):
@@ -60,34 +56,29 @@ def add_topping(request):
     # Index into list values
     for el in request.GET: value = el
     ids = value.split(",")
-    print(ids, "IDS")
+
     # Get item name and pop from id-list
     name = ids[0]
     ids.pop(0)
     price = ids[0]
     ids.pop(0)
-    print(float(price), "PRICE")
 
     # Convert strings to integers to get id's
-    nums, tops = [], []
+    nums, tops, toppings = [], [], []
     [nums.append(int(num)) for num in ids]
-    [tops.append(Topping.objects.filter(id=i)) for i in nums]
+    [tops.append(Topping.objects.filter(id=i).values('toppingname').first().values()) for i in nums]
+    [toppings.append(list(i)[0]) for i in tops]
 
     # Get pizza object with pizza-name
     pizza = Pizza.objects.filter(name=name).first()
 
     # Make new item with these toppings
-    item = Item(pizza=pizza, price=price)
+    item = Item(pizza=pizza, price=price, toppings=toppings)
     item.save()
-    # item.pizza = pizza
-    [print(top.first()) for top in tops]
-
-    # Add all selected toppings to pizza
-    [item.toppings.add(top.first()) for top in tops]
 
     # Check if this user already has an order
     order = Order.objects.filter(user=request.user).first()
-    # print(item, "ITEM")
+
     # Create new order for this user if it doesn't exist
     if order is None:
         order = Order(user=request.user)
@@ -96,6 +87,12 @@ def add_topping(request):
     # Add item to orders for this user
     order.item.add(item)
     order.save()
-    # print(order, "order")
 
     return HttpResponse("Redirect index")
+
+
+def delete(request, order):
+    """ Get selected item and delete from orders """
+    Item.objects.filter(id=order).delete()
+
+    return redirect("/")

@@ -15,7 +15,7 @@ class Pizza(models.Model):
     category = models.CharField(max_length=10)
     name = models.CharField(max_length=64)
     large_price = models.DecimalField(max_digits=5, decimal_places=2)
-    small_price = models.DecimalField(max_digits=5, decimal_places=2)
+    small_price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -42,11 +42,12 @@ class Item(models.Model):
     salad = models.ForeignKey(Salad, on_delete=models.CASCADE, null=True, blank=True)
 
     # One pizza can have several toppings
-    toppings = models.ManyToManyField(Topping, related_name="toppings")
+    toppings = models.CharField(max_length=120, blank=True, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f'Price: {self.price}, pizza: {self.pizza}, salad: {self.salad}, topping: {self.toppings.all()}'
+        return f'{self.pizza}, {self.price}, {self.toppings}'
+
 
 
 class Order(models.Model):
