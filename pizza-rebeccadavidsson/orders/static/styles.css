@@ -5,6 +5,10 @@ body {
   margin:40px;
 }
 
+#navtext {
+  font-size: 18px;
+}
+
 .btn {
   bottom: 15px;
 }

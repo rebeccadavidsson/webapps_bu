@@ -28,7 +28,6 @@
       <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
-
       <script type="text/javascript" src="{% static 'modalscript.js' %}"></script>
 
     <title>Pizza project</title>
@@ -39,6 +38,24 @@
 
   <nav class="navbar navbar-light blue lighten-4" style="opacity:0.9">
     <a class="navbar-brand" href="#"></a>
+    <div class="row" id="navtext">
+      <div class="col">
+        <div class="scrollto" id="pizzascroll">
+        <button class="btn" style="margin-top:25px;" type="button" name="button">Pizza</button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="scrollto" id="saladscroll">
+        <button class="btn" style="margin-top:25px;" type="button" name="button">Salads</button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="scrollto" id="pastascroll">
+        <button class="btn" style="margin-top:25px;" type="button" name="button">Pasta</button>
+        </div>
+      </div>
+    </div>
+
     <br><br><b>
   </nav>
 
@@ -47,4 +64,6 @@
   {% endblock %}
     </div>
 </body>
+
+
 </html>

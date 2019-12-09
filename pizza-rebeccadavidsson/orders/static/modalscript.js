@@ -1,5 +1,17 @@
 
+
+
 $(document).ready(function(){
+
+  $(".scrollto").click(function(){
+    console.log(this.id);
+
+    $('html,body').animate({
+        scrollTop: $("#" + this.id + "to").offset().top},
+        'slow');
+
+  });
+
 
   $(".myModal").click(function(){
 
