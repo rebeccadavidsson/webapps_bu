@@ -1,13 +1,16 @@
 from django.http import HttpResponse, Http404
+from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
-from django.core import serializers
-import json
-from .models import Pizza, Salad, Topping, Order, Item
+
+from .models import Pizza, Topping, Order, Item
 
 
 def index(request):
     """ Load menu """
-    print(Order.objects.filter(user=request.user), "KSDHFK")
+
+    if not request.user.is_authenticated:
+        return render(request, "login.html")
+
     if not Order.objects.filter(user=request.user):
         orders, prices, toppings = None, None, None
     else:
@@ -18,6 +21,7 @@ def index(request):
     context = {
         "pizzas": Pizza.objects.filter(category="pizza"),
         "salads": Pizza.objects.filter(category="salad"),
+        "pastas": Pizza.objects.filter(category="pasta"),
         "toppings": Topping.objects.all(),
         "orders": orders,
         "total": prices,
@@ -96,3 +100,23 @@ def delete(request, order):
     Item.objects.filter(id=order).delete()
 
     return redirect("/")
+
+
+def login(request):
+    """Let user log in and render login template"""
+
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+
+        # If user already exists, redirect to index
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+
+    return render(request, "login.html", {"message": "TODO"})
+
+def register(request):
+
+    return HttpResponse('TODO')
